@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Démo du chat en direct</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font: 16px/1.6 system-ui, sans-serif; max-width: 720px; margin: 0 auto; padding: 32px 16px; }
+    code { background: rgba(127,127,127,.15); padding: 1px 5px; border-radius: 4px; }
+    nav a { margin-right: 16px; }
+  </style>
+</head>
+<body>
+  <h1>Démo du chat en direct</h1>
+  <p>Page servie uniquement quand <code>DEMO_PAGE=true</code>. Avec <code>npm run dev:mock</code>, Discord est simulé : chaque message reçoit une réponse automatique.</p>
+  <nav><a href="/demo">Page 1</a><a href="/demo/autre-page">Page 2</a></nav>
+  <p>Changez de page : la conversation de cet onglet est conservée.</p>
+  <script src="/widget.js" defer
+          data-title="Support (démo)"
+          data-privacy-url="/demo#confidentialite"
+          data-offline="message"
+          data-contact-url="/demo#contact"></script>
+</body>
+</html>
