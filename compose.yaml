@@ -1,0 +1,23 @@
+services:
+  livechat:
+    build: .
+    image: heberghub-livechat:2
+    container_name: livechat
+    restart: unless-stopped
+    env_file: .env
+    init: true
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    ports:
+      # Exposé en local seulement : placez un proxy inverse HTTPS devant.
+      - "127.0.0.1:3000:3000"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"

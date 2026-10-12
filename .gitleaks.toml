@@ -1,0 +1,8 @@
+# Valeurs fictives connues : identifiants des tests et exemple de jeton inventé de la v1.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Identifiants Discord fictifs"
+paths = ['''(^|/)test/''']
+commits = ["332070c4ebfb33f168dae992397f706c2fcab2e6"]
