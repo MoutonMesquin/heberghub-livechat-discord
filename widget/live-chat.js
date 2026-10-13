@@ -308,6 +308,9 @@
   }
 
   function system(text) {
+    // Jamais deux fois de suite le même avis (reconnexions répétées)
+    var last = state.messages[state.messages.length - 1];
+    if (last && last.from === 'system' && last.text === text) return;
     addMessage({ clientId: randomId(), from: 'system', text: text });
   }
 
@@ -444,6 +447,10 @@
       socket.on('session', function (s) {
         var hadConversation = state.messages.some(function (m) { return m.from === 'support' || m.status === 'sent'; });
         if (state.sessionId && s.sessionId !== state.sessionId && hadConversation) {
+          // L'ancienne conversation est close côté serveur : on la retire et on ne garde qu'un seul avis,
+          // sinon chaque nouvelle session (inactivité, redémarrage du serveur) en ajoutait un autre.
+          state.messages = [];
+          Object.keys(nodes).forEach(function (k) { if (nodes[k].parentNode) nodes[k].parentNode.removeChild(nodes[k]); delete nodes[k]; });
           system('Votre conversation précédente a expiré : votre prochain message en ouvrira une nouvelle.');
         }
         state.sessionId = s.sessionId;
